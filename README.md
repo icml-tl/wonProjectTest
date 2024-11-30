@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #  WofDemo
 
 This template should help get you started developing with Vue 3 in Vite.
@@ -33,3 +34,7 @@ npm run build
 ```sh
 npm run lint
 ```
+=======
+# wonProjectTest
+Projet : Outil Simplifié d'Analyse des Paniers d'Achat 🛒
+>>>>>>> 932ddd396f61d64ae41bd12c985b6ef315e2b97e
