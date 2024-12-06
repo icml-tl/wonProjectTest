@@ -1,26 +1,45 @@
-<script setup>
-import cards from './cards.vue'
-import charts from './charts.vue'
-import { ref } from 'vue'
-</script>
-
 <template>
-  <div class="p-4 sm:ml-64">
+  <div class="p-4 sm:ml-64 overflow-hidden">
     <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
-      <!-- card starts here -->
-      <cards></cards>
-      <!-- cards end here -->
-
-      <div class="flex items-center justify-center mb-4 rounded bg-gray-50 dark:bg-gray-800">
-        <!-- sales by category chart here -->
-        <charts :chartType="1"></charts>
-        <!-- sales by category end here -->
+      <div class="flex items-end w-full justify-end mb-4 rounded bg-transparent">
+        <filterByDate @filter-changed="handleFilterChange" />
       </div>
-      <div class="flex items-center justify-center mb-4 rounded bg-gray-50 dark:bg-gray-800">
-        <!-- sales by product chart here -->
-        <charts :chartType="2"></charts>
-        <!-- sales by product end here -->
+      <!-- card starts here -->
+      <cards  :dateRange="selectedDateRange"></cards>
+
+      <!-- products ranking -->
+      <productsRanking :dateRange="selectedDateRange"></productsRanking>
+
+      <div class="flex items-center  justify-center mb-4 rounded bg-gray-50 dark:bg-gray-800">
+        <!-- sales by category pie chart here -->
+        <charts :chartType="1" :dateRange="selectedDateRange"></charts>
+
       </div>
     </div>
   </div>
 </template>
+
+<script setup>
+import cards from './cards.vue'
+import charts from './charts.vue'
+import productsRanking from './productsRanking.vue';
+import filterByDate from './filterByDate.vue'
+import { ref } from 'vue'
+
+const selectedDateRange = ref({
+  startDate: "",
+  endDate: ""
+})
+
+const handleFilterChange = (dateRange) => {
+  selectedDateRange.value = dateRange
+  if (!dateRange.startDate && !dateRange.endDate) {
+    console.log('All time selected - no date filtering')
+    // Handle all time case - fetch all data without date constraints
+  } else {
+    console.log('Date range:', dateRange)
+    // Handle specific date range filtering
+  }
+}
+
+</script>
